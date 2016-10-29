@@ -1,5 +1,20 @@
 <?php
+
 $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
+
+//データベース接続
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$conn = new mysqli($server, $username, $password, $db);
+if (!$conn) {
+    exit("Connect error!");
+}
+
 
 
 //ユーザーからのメッセージ取得
@@ -13,12 +28,12 @@ $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 
 //メッセージ以外のときは何も返さず終了
-if($type != "text"){
-	exit;
+if ($type != "text") {
+    exit;
 }
 
 //返信データ作成
-if ($text == 'はい') {
+/*if ($text == 'はい') {
   $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
@@ -168,4 +183,4 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'Authorization: Bearer ' . $accessToken
     ));
 $result = curl_exec($ch);
-curl_close($ch);
+curl_close($ch);*/
