@@ -12,7 +12,7 @@ $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 
-$type2 = $jsonObj->{"events"}[0]->{"type"};
+$type2 = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 
 //メッセージ以外のときは何も返さず終了
 if ($type != "text") {
