@@ -2,21 +2,6 @@
 
 $accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
 
-//データベース接続
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$server = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$db = substr($url["path"], 1);
-
-$conn = new mysqli($server, $username, $password, $db);
-if (!$conn) {
-    exit("Connect error!");
-}
-
-
-
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
 $jsonObj = json_decode($json_string);
@@ -27,13 +12,45 @@ $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 
+$type2 = $jsonObj->{"events"}[0]->{"type"};
+
 //メッセージ以外のときは何も返さず終了
 if ($type != "text") {
     exit;
 }
 
+if($type2 == 'join'){
+    $response_format_text = [
+    "type" => "template",
+    "altText" => "こちらの〇〇はいかがですか？",
+    "template" => [
+      "type" => "buttons",
+      "thumbnailImageUrl" => "https://" . $_SERVER['SERVER_NAME'] . "/img1.jpg",
+      "title" => "○○レストラン",
+      "text" => "お探しのレストランはこれですね",
+      "actions" => [
+          [
+            "type" => "postback",
+            "label" => "予約する",
+            "data" => "action=buy&itemid=123"
+          ],
+          [
+            "type" => "postback",
+            "label" => "電話する",
+            "data" => "action=pcall&itemid=123"
+          ],
+          [
+            "type" => "message",
+            "label" => "違くないやつ",
+            "text" => "違うやつお願い"
+          ]
+      ]
+    ]
+  ];
+}
+
 //返信データ作成
-/*if ($text == 'はい') {
+if ($text == 'はい') {
   $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
@@ -183,4 +200,4 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'Authorization: Bearer ' . $accessToken
     ));
 $result = curl_exec($ch);
-curl_close($ch);*/
+curl_close($ch);
