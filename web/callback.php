@@ -19,7 +19,7 @@ if ($type != "text") {
     exit;
 }
 
-if($type2 == 'join'){
+if($type2 == "join"){
     $response_format_text = [
     "type" => "template",
     "altText" => "こちらの〇〇はいかがですか？",
