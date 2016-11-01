@@ -9,6 +9,8 @@
     $link = mysqli_connect($server, $username, $password, $db);
     $result = mysqli_query($link, "select * from user");
 
+echo $url;
+
     while($user = mysqli_fetch_array($result)) {
       echo $user['id'], " : ", $user['name'], "<br>";
     }
