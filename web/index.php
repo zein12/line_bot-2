@@ -1,9 +1,9 @@
 <?php
     $url = parse_url(getenv("mysql2://<b217bd08555b23>:<4a2fa5be>@<us-cdbr-iron-east-04.cleardb.net>/<heroku_bacf636d511d4fe>?reconnect=true"));
 
-    $server = $url["host"];
     $username = $url["user"];
     $password = $url["pass"];
+    $server = $url["host"];
     $db = substr($url["path"], 1);
 
     $link = mysqli_connect($server, $username, $password, $db);
