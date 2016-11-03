@@ -34,7 +34,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e7157
     $db = 'heroku_e0a333c38f14545';
 
     $link = mysqli_connect($server, $username, $password, $db);
-    $result = mysqli_query($link, "select * from user");
+    //$result = mysqli_query($link, "select * from user");
 
 
 
@@ -83,11 +83,11 @@ function DoActionAll($message_text){
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   } else if ("@db" == $message_text) {
-    while($user = mysqli_fetch_array($result)) {
-      echo $user['id'], " : ", $user['name'], "<br>";
-      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($user['id'], " : ", $user['name'], "<br>");
-      $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-    }
+    $result = mysqli_query($link, "select * from user");
+    $row = mysqli_fetch_array($result, MYSQLI_NUM);
+    //printf ("%s (%s)\n", $row[0], $row[1]);
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("%s (%s)\n", $row[0], $row[1]);
+    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   }
 }
 //BeforeのDoAction,メッセージを見てアクションする
