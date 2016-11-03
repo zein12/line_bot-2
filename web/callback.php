@@ -27,6 +27,9 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e7157
 ////////////////////////////
 //データベースと接続する場所
 ////////////////////////////
+
+    $user_id[]
+
     $server = 'us-cdbr-iron-east-04.cleardb.net';
     $username = 'b8613072c41507';
     $password = 'a207894a';
@@ -84,7 +87,7 @@ function DoActionAll($message_text){
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   } else if ("@db" == $message_text) {
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($user[1]);
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("データベース");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   }
 }
