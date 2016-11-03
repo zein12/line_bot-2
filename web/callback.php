@@ -33,7 +33,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e7157
     $password = 'a207894a';
     $db = 'heroku_e0a333c38f14545';
 
-    global $link = mysqli_connect($server, $username, $password, $db);
+    $link = mysqli_connect($server, $username, $password, $db);
     //$result = mysqli_query($link, "select * from user");
 
 
@@ -82,11 +82,11 @@ function DoActionAll($message_text){
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   } else if ("@db" == $message_text) {
-    $result = mysqli_query($link, "select id from user where id = 3;");
+    $result = mysqli_query($link, "select * from user where id = 3;");
     $row = mysqli_fetch_row($result);
     $id = $row[0];
     //printf ("%s (%s)\n", $row[0], $row[1]);
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($id);
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder(1);
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   }
 }
