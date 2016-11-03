@@ -86,9 +86,6 @@ function DoActionAll($message_text){
   } else if ("@rule" == $message_text) {
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-  } else if ("@db" == $message_text) {
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("データベース");
-    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   }
 }
 //BeforeのDoAction,メッセージを見てアクションする
