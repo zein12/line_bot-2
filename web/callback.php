@@ -86,7 +86,7 @@ function DoActionAll($message_text){
     $result = mysqli_query($link, "select * from user");
     $row = mysqli_fetch_array($result, MYSQLI_NUM);
     //printf ("%s (%s)\n", $row[0], $row[1]);
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("%s (%s)\n", $row[0], $row[1]);
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("%s (%s)\n", $row[0], $row[1], $row[2]);
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   }
 }
