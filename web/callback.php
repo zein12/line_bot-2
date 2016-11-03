@@ -35,7 +35,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e7157
 
     $link = mysqli_connect($server, $username, $password, $db);
     //$result = mysqli_query($link, "select * from user");
-
+    $test = "テストだよ"
 
 
 
@@ -86,7 +86,7 @@ function DoActionAll($message_text){
     $result = mysqli_query($link, "select id from user where id = 3;");
     $row = mysqli_fetch_array($result, MYSQLI_NUM);
     //printf ("%s (%s)\n", $row[0], $row[1]);
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($row[0]);
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($test);
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   }
 }
