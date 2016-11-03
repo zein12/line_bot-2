@@ -36,9 +36,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e7157
     $link = mysqli_connect($server, $username, $password, $db);
     $result = mysqli_query($link, "select * from user");
 
-    while($user = mysqli_fetch_array($result)) {
-      echo $user['id'], " : ", $user['name'], "<br>";
-    }
+
 
 
 $GAMEMODE_BEFORE_THE_START = 0;//@start前
@@ -85,8 +83,11 @@ function DoActionAll($message_text){
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   } else if ("@db" == $message_text) {
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($user[id]);
-    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+    while($user = mysqli_fetch_array($result)) {
+      echo $user['id'], " : ", $user['name'], "<br>";
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($user['id'], " : ", $user['name'], "<br>");
+      $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+    }
   }
 }
 //BeforeのDoAction,メッセージを見てアクションする
