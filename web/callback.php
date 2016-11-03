@@ -28,8 +28,6 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e7157
 //データベースと接続する場所
 ////////////////////////////
 
-    $user_id[]
-
     $server = 'us-cdbr-iron-east-04.cleardb.net';
     $username = 'b8613072c41507';
     $password = 'a207894a';
