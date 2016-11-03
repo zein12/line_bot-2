@@ -35,7 +35,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e7157
 
     $link = mysqli_connect($server, $username, $password, $db);
     //$result = mysqli_query($link, "select * from user");
-    $test = "テストだよ"
+    global $test = "テストだよ"
 
 
 
