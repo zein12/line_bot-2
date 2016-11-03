@@ -33,7 +33,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e7157
     $password = 'a207894a';
     $db = 'heroku_e0a333c38f14545';
 
-    $link = mysqli_connect($server, $username, $password, $db);
+    global $link = mysqli_connect($server, $username, $password, $db);
     //$result = mysqli_query($link, "select * from user");
 
 
