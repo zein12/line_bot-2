@@ -168,13 +168,13 @@ function DoActionWaiting($message_text){
     if(null != $row){
     $response = $bot->getProfile($event->source->userId);
     if ($response->isSucceeded()) {
+             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
+             $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
              $profile = $response->getJSONDecodedBody();
              $user_name = mysqli_real_escape_string($link, $profile['displayName']);
              $user_id = mysqli_real_escape_string($link, $event->source->userId);
              $room_num = mysqli_real_escape_string($link, $row[0]);
              $result = mysqli_query($link, "insert into user (user_id, user_name, game_room_num, role, voted_num, is_roling, is_voting) values ('$user_id', '$user_name', '$room_num', '無し', 0, 'false', 'false');");
-             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
-             $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
          }
        }
      }
