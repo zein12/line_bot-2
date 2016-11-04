@@ -168,7 +168,7 @@ function DoActionWaiting($message_text){
     if(null != $row){
     $response = $bot->getProfile($event->source->userId);
     if ($response->isSucceeded()) {
-            $profile = $response->getJSONDecodedBody();
+            //$profile = $response->getJSONDecodedBody();
             //$user_name = mysqli_real_escape_string($link, $profile['displayName']);
             //$user_id = mysqli_real_escape_string($link, $event->source->userId);
             //$room_num = mysqli_real_escape_string($link, $row[0]);
