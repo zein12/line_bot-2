@@ -154,6 +154,10 @@ function DoActionBefore($message_text){
 //WaitingのDoAction,メッセージを見てアクションする
 function DoActionWaiting($message_text){
   global $bot, $event, $link;
+
+  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
+  $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+  
   if("group" == $event->source->type || "room" == $event->source->type){
     if ("@member" == $message_text) {
       // 現在参加者のみ表示
@@ -161,9 +165,7 @@ function DoActionWaiting($message_text){
       // 参加者一覧を表示してからゲーム開始
     }
   } else {
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
-    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-    
+
     $message_text = mysqli_real_escape_string($link, $message_text);
     //個人チャット内
     $row = mysqli_fetch_row($result);
