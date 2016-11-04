@@ -163,9 +163,9 @@ function DoActionWaiting($message_text){
   } else {
     $message_text = mysqli_real_escape_string($link, $message_text);
     //個人チャット内
-    //if($result = mysqli_query($link, "select * from game_room where game_room_num = '$message_text'")){
     $row = mysqli_fetch_row($result);
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
+    if($result = mysqli_query($link, "select * from game_room where game_room_num = '$message_text'")){
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
     if(null != $row){
     $response = $bot->getProfile($event->source->userId);
