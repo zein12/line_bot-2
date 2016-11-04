@@ -161,11 +161,12 @@ function DoActionWaiting($message_text){
       // 参加者一覧を表示してからゲーム開始
     }
   } else {
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
+    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+    
     $message_text = mysqli_real_escape_string($link, $message_text);
     //個人チャット内
     $row = mysqli_fetch_row($result);
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
-    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
     if($result = mysqli_query($link, "select * from game_room where game_room_num = '$message_text'")){
     if(null != $row){
     $response = $bot->getProfile($event->source->userId);
