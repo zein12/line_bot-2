@@ -51,8 +51,8 @@ require('../vendor/autoload.php');
 $input = file_get_contents('php://input');
 $json = json_decode($input);
 $event = $json->events[0];
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('vYskIIIna79UwhpXsYtI3Xd8LsBWIrYwurJ6bWajgIKK9o7hXJuYAAl16uw8E1+9RuwuNHMPU/JEv2bL9FSu6hglkLY+fTZsSCtiEqsObUsZtUf1Hp7mmPZmttk8REBs4635vsMjsrd21TXyEN8iTQdB04t89/1O/w1cDnyilFU=');
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e715790b82e0544d']);
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('w9SmZJ6zm2ln3DRx5gw6lxNgLi5Ayjx7ftGGpyEsKhM0sGStTEdwNeu7UdSe7H3Mj7ayGjRubK0xHN7onGWxEwL6K8lHyukidy2my3LQT02u+EsRK+Mqsvj4fe0OVCIEYzFMAC+VzUTNjINaAQiRbwdB04t89/1O/w1cDnyilFU=');
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '3095c84a53d38913b6716fb770f3f326']);
 
 
 ////////////////////////////
@@ -129,15 +129,33 @@ function DoActionAll($message_text){
   } else if ("@debug" == $message_text) {//デバッグ用
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gameMode);
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+  } else if ("user" == $event->source->type) {
+    $gameRoomNum = mysqli_real_escape_string($link, $message_text);
+    //個人チャット内
+    if ($result = mysqli_query($link, "select * from game_room where game_room_num = '$gameRoomNum';")) {
+      $row = mysqli_fetch_row($result);
+      if(null != $row){
+        $response = $bot->getProfile($event->source->userId);
+        if ($response->isSucceeded()) {
+          $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("rurururuururururur!!");
+          $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+          $profile = $response->getJSONDecodedBody();
+          $user_name = mysqli_real_escape_string($link, $profile['displayName']);
+          $user_id = mysqli_real_escape_string($link, $event->source->userId);
+          $room_num = mysqli_real_escape_string($link, $row[0]);
+          $result = mysqli_query($link, "insert into user (user_id, user_name, game_room_num, role, voted_num, is_roling, is_voting) values ('$user_id', '$user_name', '$room_num', '無し', 0, 'false', 'false');");
+        }
+      }
+    }
   }
 }
 //BeforeのDoAction,メッセージを見てアクションする
 function DoActionBefore($message_text){
-  global $bot, $event, $link;
+  global $bot, $event, $link, $result;
   if("group" == $event->source->type || "room" == $event->source->type){
     if ("@game" == $message_text) {
       // ルームナンバー発行、テーブルにレコードを生成する、gameModeを移行する
-      $roomNumber = 100;// 仮
+      $roomNumber = 101;// 仮
       $roomNumber = mysqli_real_escape_string($link, $roomNumber);
       if ("group" == $event->source->type){
         $gameRoomId = $event->source->groupId;
@@ -154,33 +172,12 @@ function DoActionBefore($message_text){
 //WaitingのDoAction,メッセージを見てアクションする
 function DoActionWaiting($message_text){
   global $bot, $event, $link;
-
-  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
-  $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-  
   if("group" == $event->source->type || "room" == $event->source->type){
     if ("@member" == $message_text) {
       // 現在参加者のみ表示
     } else if ("@start" == $message_text) {
       // 参加者一覧を表示してからゲーム開始
     }
-  } else {
-
-    $message_text = mysqli_real_escape_string($link, $message_text);
-    //個人チャット内
-    $row = mysqli_fetch_row($result);
-    if($result = mysqli_query($link, "select * from game_room where game_room_num = '$message_text'")){
-    if(null != $row){
-    $response = $bot->getProfile($event->source->userId);
-    if ($response->isSucceeded()) {
-             $profile = $response->getJSONDecodedBody();
-             $user_name = mysqli_real_escape_string($link, $profile['displayName']);
-             $user_id = mysqli_real_escape_string($link, $event->source->userId);
-             $room_num = mysqli_real_escape_string($link, $row[0]);
-             $result = mysqli_query($link, "insert into user (user_id, user_name, game_room_num, role, voted_num, is_roling, is_voting) values ('$user_id', '$user_name', '$room_num', '無し', 0, 'false', 'false');");
-         }
-       }
-     }
   }
 }
 //NightのDoAction,メッセージを見てアクションする
@@ -222,6 +219,14 @@ function ProcessRoling(){
 function ProcessVoting(){
   //誰かが投票するとカウント＋１とtrueと投票された人に＋１にする、投票のカウントと参加人数を照合して同数になったらgameMode+1と投票結果開示する
 }
+
+
+
+////////////////////////////
+//データベースとの接続を終了する場所
+////////////////////////////
+mysqli_free_result($result);
+mysqli_close($link);
 
 
 
