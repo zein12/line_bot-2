@@ -84,7 +84,7 @@ if ("group" == $event->source->type) {
   $gameRoomId = $event->source->roomId;
 }
 $gameRoomId = mysqli_real_escape_string($link, $gameRoomId);
-if($result = mysqli_query($link, "select * from game_room where game_room_id = '$gameRoomId'")){
+if($result = mysqli_query($link, "select * from game_room where game_room_id = '$gameRoomId';")){
   $row = mysqli_fetch_row($result);
   if(null != $row){
     $game_mode = $row[2];
