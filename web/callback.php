@@ -167,9 +167,9 @@ function DoActionWaiting($message_text){
     $row = mysqli_fetch_row($result);
     if(null != $row){
     $response = $bot->getProfile($event->source->userId);
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
+    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
     if ($response->isSucceeded()) {
-             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
-             $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
              $profile = $response->getJSONDecodedBody();
              $user_name = mysqli_real_escape_string($link, $profile['displayName']);
              $user_id = mysqli_real_escape_string($link, $event->source->userId);
