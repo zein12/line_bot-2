@@ -165,10 +165,10 @@ function DoActionWaiting($message_text){
     //個人チャット内
     if($result = mysqli_query($link, "select * from game_room where game_room_num = '$message_text'")){
     $row = mysqli_fetch_row($result);
-    if(null != $row){
-    $response = $bot->getProfile($event->source->userId);
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("うおだよ！");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+    if(null != $row){
+    $response = $bot->getProfile($event->source->userId);
     if ($response->isSucceeded()) {
              $profile = $response->getJSONDecodedBody();
              $user_name = mysqli_real_escape_string($link, $profile['displayName']);
