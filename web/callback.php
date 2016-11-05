@@ -130,9 +130,26 @@ function DoActionAll($message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
-    $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("石井", "石井");
-    $action1 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("川崎", "川崎");
-    $action2 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("小野", "小野");
+    $result = mysqli_query($link, "select * from game_room where game_room_id = '$gameRoomId'");
+    $row = mysqli_fetch_row($result);
+
+    if(null != $row){
+        $game_room_num = $row[0];
+        $game_room_num = mysqli_real_escape_string($link, $game_room_num);
+        $result = mysqli_query($link, "select * from user where game_room_num = '$game_room_num'");
+        //$member = "";
+        // while($row = mysqli_fetch_row($result)){
+        //   $memberListText .= $row[1] . "\n";
+        // }
+        $member = mysqli_fetch_row($result);
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("成功");
+        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+      }
+
+
+    $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[0], "石井");
+    $action1 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[1], "川崎");
+    $action2 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[2], "小野");
 
     $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("誰に投票する？", "投票したい人を選んでね！", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action0, $action1, $action2]);
     $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("投票ボタンはここに表示されてるよ", $button);
@@ -144,23 +161,6 @@ function DoActionAll($message_text){
   } else if ("@but2" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-
-    $columns = []; // カルーセル型カラムを5つ追加する配列
-    foreach ($lists as $list) {
-    // カルーセルに付与するボタンを作る
-    //$action = new UriTemplateActionBuilder("クリックしてね","aaa");
-    $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("石井", "石井");
-    // カルーセルのカラムを作成する
-    $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
-    $columns[] = $column;
-    }
-    // カラムの配列を組み合わせてカルーセルを作成する
-    $carousel = new CarouselTemplateBuilder($columns);
-    // カルーセルを追加してメッセージを作る
-    $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
-
-    $response = $bot->pushMessage($event->source->userId, $carousel_message);
-
   } else if ("@debug" == $message_text) {//デバッグ用
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gameMode);
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
