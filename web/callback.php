@@ -144,7 +144,7 @@ function DoActionAll($message_text){
   } else if ("@but2" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-    $columns = []; // カルーセル型カラムを5つ追加する配列
+    $columns = [0]; // カルーセル型カラムを5つ追加する配列
     foreach ($lists as $list) {
     // カルーセルに付与するボタンを作る
     //$action = new UriTemplateActionBuilder("クリックしてね", /* まとめのURL */ );
@@ -156,7 +156,7 @@ function DoActionAll($message_text){
     // カラムの配列を組み合わせてカルーセルを作成する
     $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
     // カルーセルを追加してメッセージを作る
-    
+
     $carousel_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("メッセージのタイトル", $carousel);
     $response = $bot->pushMessage($event->source->userId, $carousel_message);
 
