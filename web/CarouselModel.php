@@ -21,8 +21,8 @@ class CarouselModel
 
 
     static function getUserList($game_room_id,$link){
-        $result = mysqli_query($link, "select user_id from user where game_room_nm = '$game_room_id'");
-        //select user_id from user where game_room_nm = $roomid
+        $result = mysqli_query($link, "select user_id from user where game_room_num = '$game_room_id'");
+        //select user_id from user where game_room_num = $roomid
         return mysqli_fetch_row($result);
     }
 
