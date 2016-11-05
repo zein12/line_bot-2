@@ -149,8 +149,10 @@ function DoActionAll($message_text){
     $response = $bot->replyMessage($event->replyToken, $templateMessage);
     error_log(print_r($response));
       */
+      error_log("hello, this is a test!");
       $userlist = CarouselModel::sendCarousel($gameRoomId,$link);
-      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userlist[0]["user_id"]);
+      error_log(print_r($userlist,true));
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userlist["user_id"]);
       $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
   } else if ("@but1" == $message_text) {
