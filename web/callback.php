@@ -135,7 +135,7 @@ function DoActionAll($message_text){
     $action2 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("小野", "小野");
 
     $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("誰に投票する？", "投票したい人を選んでね！", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action0, $action1, $action2]);
-    $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("投票ボタンここに表示されてるよ", $button);
+    $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("投票ボタンはここに表示されてるよ", $button);
 
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("");
 
@@ -151,13 +151,13 @@ function DoActionAll($message_text){
     //$action = new UriTemplateActionBuilder("クリックしてね", /* まとめのURL */ );
     $action = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("テスト", "test");
     // カルーセルのカラムを作成する
-    $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文","https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
+    $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文","https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
     $columns[] = $column;
     }
     // カラムの配列を組み合わせてカルーセルを作成する
-    $carousel = new CarouselTemplateBuilder($columns);
+    $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
     // カルーセルを追加してメッセージを作る
-    $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
+    $carousel_message = new new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("メッセージのタイトル", $carousel);
 
   } else if ("@debug" == $message_text) {//デバッグ用
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gameMode);
