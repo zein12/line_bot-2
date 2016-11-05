@@ -131,7 +131,7 @@ function DoActionAll($message_text){
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
-  }else if("@car"){
+  }else if("@car" == $message_text){
     //カルーセル表示
 
     $carouselTemplateBuilder = new CarouselTemplateBuilder([
