@@ -156,12 +156,10 @@ function DoActionAll($message_text){
     }
     // カラムの配列を組み合わせてカルーセルを作成する
     $carousel = new CarouselTemplateBuilder($columns);
-   // カルーセルを追加してメッセージを作る
-   $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
+    // カルーセルを追加してメッセージを作る
+    $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
 
-   $message = new MultiMessageBuilder();
-   $message->add($carousel_message);
-   $res = $bot->replyMessage($event->source->userId, $message);
+    $res = $bot->replyMessage($event->source->userId, $carousel_message);
 
   } else if ("@debug" == $message_text) {//デバッグ用
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gameMode);
