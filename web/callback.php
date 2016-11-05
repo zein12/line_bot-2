@@ -199,14 +199,14 @@ function DoActionAll($message_text){
 
     $response = $bot->leaveGroup($gameRoomId);
     //error_log(var_dump($response));
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("leaveだよ");
-    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-    // if($response -> getHTTPStatus() == 200){
-    //
-    //   $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("leaveだよ");
-    //   $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-    //
-    // }
+    //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("leaveだよ");
+    //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+    if($response -> getHTTPStatus() == 200){
+
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("leaveだよ");
+      $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+
+    }
     //echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
 
