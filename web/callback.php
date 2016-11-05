@@ -199,6 +199,8 @@ function DoActionAll($message_text){
     $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e715790b82e0544d']);
     $response = $bot->leaveGroup($gameRoomId);
     error_log(var_dump($response));
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("leaveだよ");
+    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
     if($response -> getHTTPStatus() == 200){
 
       $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("leaveだよ");
