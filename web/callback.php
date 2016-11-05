@@ -142,25 +142,8 @@ function DoActionAll($message_text){
     $response = $bot->pushMessage($event->source->userId, $button_message);
 
   } else if ("@but2" == $message_text){
-    //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
-    //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-    $columns = [0]; // カルーセル型カラムを5つ追加する配列
-    foreach ($lists as $list) {
-    // カルーセルに付与するボタンを作る
-    //$action = new UriTemplateActionBuilder("クリックしてね", /* まとめのURL */ );
-    $action = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("石井", "石井");
-    // カルーセルのカラムを作成する
-    $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
-    $columns[] = $column;
-    }
-    // カラムの配列を組み合わせてカルーセルを作成する
-    $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
-    // カルーセルを追加してメッセージを作る
-
-    $carousel_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("メッセージのタイトル", $carousel);
-    $response = $bot->pushMessage($event->source->userId, $carousel_message);
-
-
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
+    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   } else if ("@debug" == $message_text) {//デバッグ用
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gameMode);
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
