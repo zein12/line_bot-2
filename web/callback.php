@@ -126,20 +126,6 @@ function DoActionAll($message_text){
   } else if ("@rule" == $message_text) {
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-  }else if("@car"){
-    //カルーセル表示
-
-    //テンプレートメッセージビルダー送信
-    $columns[] = null;
-    $action = new UriTemplateActionBuilder("クリックしてね", "https://twitter.com");
-    // カルーセルのカラムを作成する
-    $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://pbs.twimg.com/profile_images/459921170251264000/ax4FMwXA.jpeg", [$action]);
-    $columns[] = $column;
-    error_log(var_dump($columns), 3, '/var/tmp/app.log');
-    $carousel = new CarouselTemplateBuilder($columns);
-    $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
-    $response = $bot->replyMessage($event->replyToken, $carousel_message);
-    error_log("response : ".var_dump($response),3,'/var/tmp/app.log');
   } else if ("@but1" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
@@ -172,14 +158,25 @@ function DoActionAll($message_text){
 
     $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("誰に投票する？", "投票したい人を選んでね！", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action0, $action1, $action2]);
     $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("投票ボタンはここに表示されてるよ", $button);
-    
+
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("");
 
     $response = $bot->pushMessage($event->source->userId, $button_message);
 
-  } else if ("@but2" == $message_text){
+  } else if ("@leave" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+
+    $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('vYskIIIna79UwhpXsYtI3Xd8LsBWIrYwurJ6bWajgIKK9o7hXJuYAAl16uw8E1+9RuwuNHMPU/JEv2bL9FSu6hglkLY+fTZsSCtiEqsObUsZtUf1Hp7mmPZmttk8REBs4635vsMjsrd21TXyEN8iTQdB04t89/1O/w1cDnyilFU=');
+    $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e715790b82e0544d']);
+    $response = $bot->leaveRoom($event->source->roomId);
+    error_log(var_dump($response));
+    if($response -> getHTTPStatus() == 200){
+
+    }
+    //echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+
+
   } else if ("@debug" == $message_text) {//デバッグ用
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gameMode);
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
