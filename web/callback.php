@@ -130,17 +130,34 @@ function DoActionAll($message_text){
     //カルーセル表示
 
     //テンプレートメッセージビルダー送信
+
+
+    //
+    $carouselTemplateBuilder = new CarouselTemplateBuilder([
+        new CarouselColumnTemplateBuilder('foo', 'bar', "https://pbs.twimg.com/profile_images/459921170251264000/ax4FMwXA.jpeg", [
+            new UriTemplateActionBuilder('てすと', 'https://twitter.com'),
+            new PostbackTemplateActionBuilder('Buy', 'action=buy&itemid=123'),
+        ])
+    ]);
+    $templateMessage = new TemplateMessageBuilder('Button alt text', $carouselTemplateBuilder);
+    //$this->bot->replyMessage($replyToken, $templateMessage);
+    $response = $bot->replyMessage($event->replyToken, $templateMessage);
+    error_log(print_r($response));
+    //
+    /*
     $columns[] = null;
     $action = new UriTemplateActionBuilder("クリックしてね", "https://twitter.com");
     // カルーセルのカラムを作成する
     $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://pbs.twimg.com/profile_images/459921170251264000/ax4FMwXA.jpeg", [$action]);
     $columns[] = $column;
     error_log("columns : " . var_dump($columns));
+    error_log(print_r($columns,true));
     $carousel = new CarouselTemplateBuilder($columns);
-    $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
+    $carousel_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("メッセージのタイトル", $carousel);
     $response = $bot->replyMessage($event->replyToken, $carousel_message);
-    var_dump(var_dump($response)
-  } else if ("@but1" == $message_text){
+    error_log(var_dump($response));
+    */
+  } else if ("@but1" == $message_text) {
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
