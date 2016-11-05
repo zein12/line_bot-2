@@ -130,14 +130,15 @@ function DoActionAll($message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
-    $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("NU", "nu");
-    $action1 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("NO", "no");
-    $action2 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("NE", "ne");
+    $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("石井", "石井");
+    $action1 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("川崎", "川崎");
+    $action2 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("小野", "小野");
 
-    $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("ひげ", "ひげげ", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action0, $action1, $action2]);
-    $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("ひげがここにボタンで表示されてるよ", $button);
+    $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("誰に投票する？", "投票したい人を選んでね！", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action0, $action1, $action2]);
+    $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("投票ボタンここに表示されてるよ", $button);
 
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ぬ");
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("");
+
     $response = $bot->pushMessage($event->source->userId, $button_message);
 
   } else if ("@debug" == $message_text) {//デバッグ用
