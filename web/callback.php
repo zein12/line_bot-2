@@ -133,6 +133,9 @@ function DoActionAll($message_text){
     $result = mysqli_query($link, "select * from game_room where game_room_id = '$gameRoomId'");
     $row = mysqli_fetch_row($result);
 
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
+    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+
     if(null != $row){
         $game_room_num = $row[0];
         $game_room_num = mysqli_real_escape_string($link, $game_room_num);
