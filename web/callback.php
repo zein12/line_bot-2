@@ -135,11 +135,11 @@ function DoActionAll($message_text){
     // カルーセルのカラムを作成する
     $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://pbs.twimg.com/profile_images/459921170251264000/ax4FMwXA.jpeg", [$action]);
     $columns[] = $column;
-    error_log(var_dump($columns), 3, '/var/tmp/app.log');
+    error_log("columns : " . var_dump($columns));
     $carousel = new CarouselTemplateBuilder($columns);
     $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
     $response = $bot->replyMessage($event->replyToken, $carousel_message);
-    error_log("response : ".var_dump($response),3,'/var/tmp/app.log');
+    var_dump(var_dump($response)
   } else if ("@but1" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
