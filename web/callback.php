@@ -48,6 +48,7 @@ use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 
 
 require('../vendor/autoload.php');
+require('../web/CarouselModel.php');
 
 
 //POST
