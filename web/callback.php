@@ -273,7 +273,26 @@ function DoActionWaiting($message_text){
   global $bot, $event, $link;
   if("group" == $event->source->type || "room" == $event->source->type){
     if ("@member" == $message_text) {
+      $result1 = mysqli_query($link, "select * from user");
+      $hoge =  mysqli_fetch_row($result1);
+      error_log(print_r($hoge,true));
+
+
       // 現在参加者のみ表示
+      $result = mysqli_query($link, "select * from game_room where game_room_id = '$gameRoomId'");
+      $row = mysqli_fetch_row($result);
+      if(null != $row){
+        $num_of_people = $row[4];
+        $game_room_num = $row[1];
+        $game_room_num = mysqli_real_escape_string($link, $game_room_num);
+        $result = mysqli_query($link, "select * from user where game_room_num = '$game_room_num'");
+        $memberListText = "";
+        while($row = mysqli_fetch_row($result)){
+          $memberListText .= $row[2] . "\n";
+        }
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("メンバー一覧(" . $num_of_people . ")\n" . $memberListText);
+        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+      }
     } else if ("@start" == $message_text) {
       // 参加者一覧を表示してからゲーム開始
     }
