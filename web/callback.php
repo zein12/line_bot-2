@@ -158,7 +158,7 @@ function DoActionAll($message_text){
     // カルーセルを追加してメッセージを作る
     $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
 
-    $response = $bot->replyMessage($event->source->userId, $carousel_message);
+    $response = $bot->pushMessage($event->source->userId, $carousel_message);
 
   } else if ("@debug" == $message_text) {//デバッグ用
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gameMode);
