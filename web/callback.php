@@ -148,7 +148,7 @@ function DoActionAll($message_text){
     $columns = []; // カルーセル型カラムを5つ追加する配列
     foreach ($lists as $list) {
     // カルーセルに付与するボタンを作る
-    $action = new UriTemplateActionBuilder("クリックしてね");
+    $action = new UriTemplateActionBuilder("クリックしてね","aaa");
     // カルーセルのカラムを作成する
     $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
     $columns[] = $column;
@@ -158,7 +158,7 @@ function DoActionAll($message_text){
     // カルーセルを追加してメッセージを作る
     $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
 
-    $res = $bot->replyMessage($event->source->userId, $carousel_message);
+    $response = $bot->replyMessage($event->source->userId, $carousel_message);
 
   } else if ("@debug" == $message_text) {//デバッグ用
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gameMode);
