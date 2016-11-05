@@ -142,21 +142,22 @@ function DoActionAll($message_text){
         //   $memberListText .= $row[1] . "\n";
         // }
         $member = mysqli_fetch_row($result);
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("成功");
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("成功!");
         $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+
       }
 
 
-    $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[0], "石井");
-    $action1 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[1], "川崎");
-    $action2 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[2], "小野");
-
-    $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("誰に投票する？", "投票したい人を選んでね！", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action0, $action1, $action2]);
-    $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("投票ボタンはここに表示されてるよ", $button);
-
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("");
-
-    $response = $bot->pushMessage($event->source->userId, $button_message);
+    // $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[0], "石井");
+    // $action1 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[1], "川崎");
+    // $action2 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[2], "小野");
+    //
+    // $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("誰に投票する？", "投票したい人を選んでね！", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action0, $action1, $action2]);
+    // $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("投票ボタンはここに表示されてるよ", $button);
+    //
+    // $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("");
+    //
+    // $response = $bot->pushMessage($event->source->userId, $button_message);
 
   } else if ("@but2" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
