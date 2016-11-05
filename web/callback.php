@@ -126,8 +126,7 @@ function DoActionAll($message_text){
   } else if ("@rule" == $message_text) {
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-<<<<<<< HEAD
-=======
+
   }else if("@car"){
     //カルーセル表示
 
@@ -141,8 +140,7 @@ function DoActionAll($message_text){
     $carousel = new CarouselTemplateBuilder($columns);
     $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
     $response = $bot->replyMessage($event->replyToken, $carousel_message);
-    var_dump(var_dump($response)
->>>>>>> 0ee1ca2e5a2a52681cb7a8f40913a0e4cdf0d288
+    var_dump(var_dump($response);
   } else if ("@but1" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
