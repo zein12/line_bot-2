@@ -152,6 +152,7 @@ function DoActionAll($message_text){
       error_log("hello, this is a test!");
       $userlist = CarouselModel::sendCarousel($gameRoomId,$link);
       error_log(print_r($userlist,true));
+      file_put_contents("php://stderr", print_r($userlist,true));
       $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userlist["user_id"]);
       $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
