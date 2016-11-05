@@ -150,7 +150,9 @@ function DoActionAll($message_text){
     error_log(print_r($response));
       */
       $userlist = CarouselModel::sendCarousel($gameRoomId,$link);
-      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder(print_r($userlist));
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("aaatesttest");
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userlist[0]);
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("aaatesttest");
 
   } else if ("@but1" == $message_text) {
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
