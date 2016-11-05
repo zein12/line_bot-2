@@ -133,18 +133,16 @@ function DoActionAll($message_text){
     $result = mysqli_query($link, "select * from game_room where game_room_id = '$gameRoomId'");
     $row = mysqli_fetch_row($result);
 
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
-    $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
     if(null != $row){
         $game_room_num = $row[0];
         $game_room_num = mysqli_real_escape_string($link, $game_room_num);
-        $result = mysqli_query($link, "select * from user where game_room_num = '$game_room_num'");
+        $result = mysqli_query($link, "select user_name from user where game_room_num = '$game_room_num'");
         //$member = "";
         // while($row = mysqli_fetch_row($result)){
         //   $memberListText .= $row[1] . "\n";
         // }
-        $member = mysqli_fetch_row($result);
+        //$member = mysqli_fetch_row($result);
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("成功!");
         $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
