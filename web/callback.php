@@ -150,7 +150,7 @@ function DoActionAll($message_text){
     error_log(print_r($response));
       */
       $userlist = CarouselModel::sendCarousel($gameRoomId,$link);
-      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder(print_r($userlist,true));
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userlist[0]["user_id"]);
       $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
   } else if ("@but1" == $message_text) {
