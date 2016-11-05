@@ -151,8 +151,11 @@ function DoActionAll($message_text){
       */
       $userlist = CarouselModel::sendCarousel($gameRoomId,$link);
       $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("aaatesttest");
+      $bot->replyMessage($event->replyToken, $textMessageBuilder);
       $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userlist[0]);
+      $bot->replyMessage($event->replyToken, $textMessageBuilder);
       $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("aaatesttest");
+      $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
   } else if ("@but1" == $message_text) {
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
