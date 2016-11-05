@@ -140,7 +140,7 @@ function DoActionAll($message_text){
     $carousel = new CarouselTemplateBuilder($columns);
     $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
     $response = $bot->replyMessage($event->replyToken, $carousel_message);
-    var_dump(var_dump($response);
+    var_dump(var_dump($response));
   } else if ("@but1" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
