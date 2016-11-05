@@ -5,6 +5,9 @@ use LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder;
 use LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
 use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 // データベース
 // ・game_room
 // game_room_num(Int) game_room_id(String) game_mode(String) num_of_people(Int) num_of_roles(Int) num_of_votes(Int)
@@ -149,8 +152,15 @@ function DoActionAll($message_text){
     $response = $bot->replyMessage($event->replyToken, $templateMessage);
     error_log(print_r($response));
       */
+      error_log("hello, this is a test!");
       $userlist = CarouselModel::sendCarousel($gameRoomId,$link);
-      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userlist[0]["user_id"]);
+      $log = new Logger('name');
+      $log->pushHandler(new StreamHandler('php://stderr', Logger::WARNING));
+      $log->addWarning('Foo');
+      $log->addWarning(print_r($userlist,true));
+      error_log(print_r($userlist,true));
+      file_put_contents("php://stderr", print_r($userlist,true));
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userlist["user_id"]);
       $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
   } else if ("@but1" == $message_text) {
