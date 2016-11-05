@@ -126,6 +126,23 @@ function DoActionAll($message_text){
   } else if ("@rule" == $message_text) {
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+<<<<<<< HEAD
+=======
+  }else if("@car"){
+    //カルーセル表示
+
+    //テンプレートメッセージビルダー送信
+    $columns[] = null;
+    $action = new UriTemplateActionBuilder("クリックしてね", "https://twitter.com");
+    // カルーセルのカラムを作成する
+    $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://pbs.twimg.com/profile_images/459921170251264000/ax4FMwXA.jpeg", [$action]);
+    $columns[] = $column;
+    error_log("columns : " . var_dump($columns));
+    $carousel = new CarouselTemplateBuilder($columns);
+    $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
+    $response = $bot->replyMessage($event->replyToken, $carousel_message);
+    var_dump(var_dump($response)
+>>>>>>> 0ee1ca2e5a2a52681cb7a8f40913a0e4cdf0d288
   } else if ("@but1" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
