@@ -136,7 +136,8 @@ function DoActionAll($message_text){
     //テンプレートメッセージビルダー送信
 
 
-    //
+    //以下は動く
+      /*
     $carouselTemplateBuilder = new CarouselTemplateBuilder([
         new CarouselColumnTemplateBuilder('foo', 'bar', "https://pbs.twimg.com/profile_images/459921170251264000/ax4FMwXA.jpeg", [
             new UriTemplateActionBuilder('てすと', 'https://twitter.com'),
@@ -144,23 +145,12 @@ function DoActionAll($message_text){
         ])
     ]);
     $templateMessage = new TemplateMessageBuilder('Button alt text', $carouselTemplateBuilder);
-    //$this->bot->replyMessage($replyToken, $templateMessage);
     $response = $bot->replyMessage($event->replyToken, $templateMessage);
     error_log(print_r($response));
-    //
-    /*
-    $columns[] = null;
-    $action = new UriTemplateActionBuilder("クリックしてね", "https://twitter.com");
-    // カルーセルのカラムを作成する
-    $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://pbs.twimg.com/profile_images/459921170251264000/ax4FMwXA.jpeg", [$action]);
-    $columns[] = $column;
-    error_log("columns : " . var_dump($columns));
-    error_log(print_r($columns,true));
-    $carousel = new CarouselTemplateBuilder($columns);
-    $carousel_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("メッセージのタイトル", $carousel);
-    $response = $bot->replyMessage($event->replyToken, $carousel_message);
-    error_log(var_dump($response));
-    */
+      */
+      $userlist = CarouselModel::sendCarousel($gameRoomId,$link);
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder(print_r($userlist));
+
   } else if ("@but1" == $message_text) {
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
