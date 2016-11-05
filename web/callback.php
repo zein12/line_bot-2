@@ -151,7 +151,7 @@ function DoActionAll($message_text){
     //$action = new UriTemplateActionBuilder("クリックしてね", /* まとめのURL */ );
     $action = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("テスト", "test");
     // カルーセルのカラムを作成する
-    $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文","https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
+    $column = new \LINE\LINEBot\TemplateBuilder\CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文","https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
     $columns[] = $column;
     }
     // カラムの配列を組み合わせてカルーセルを作成する
