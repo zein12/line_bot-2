@@ -197,7 +197,7 @@ function DoActionAll($message_text){
 
     $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('vYskIIIna79UwhpXsYtI3Xd8LsBWIrYwurJ6bWajgIKK9o7hXJuYAAl16uw8E1+9RuwuNHMPU/JEv2bL9FSu6hglkLY+fTZsSCtiEqsObUsZtUf1Hp7mmPZmttk8REBs4635vsMjsrd21TXyEN8iTQdB04t89/1O/w1cDnyilFU=');
     $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e715790b82e0544d']);
-    $response = $bot->leaveGroup($event->source->groupId);
+    $response = $bot->leaveGroup($gameRoomId);
     error_log(var_dump($response));
     if($response -> getHTTPStatus() == 200){
 
