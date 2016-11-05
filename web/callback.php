@@ -197,17 +197,17 @@ function DoActionAll($message_text){
 
   } else if ("@leave" == $message_text){
 
-    $response = $bot->leaveGroup($gameRoomId);
+    $response = $bot->leaveGroup($event->source->groupId);
     //error_log(var_dump($response));
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("leaveだよ");
     //$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-    if($response -> getHTTPStatus() == 200){
-
-      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("leaveだよ");
-      $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-
-    }
-    //echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+    // if($response -> getHTTPStatus() == 200){
+    //
+    //   $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("leaveだよ");
+    //   $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+    //
+    // }
+    echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
 
   } else if ("@debug" == $message_text) {//デバッグ用
