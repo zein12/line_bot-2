@@ -150,6 +150,8 @@ function DoActionAll($message_text){
         $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
       }
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
+      $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
 
     // $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder($member[0], "石井");
