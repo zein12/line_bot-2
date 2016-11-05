@@ -154,10 +154,11 @@ function DoActionAll($message_text){
       */
       error_log("hello, this is a test!");
       $userlist = CarouselModel::sendCarousel($gameRoomId,$link);
-      $log = new Logger('name');
-      $log->pushHandler(new StreamHandler('php://stderr', Logger::WARNING));
-      $log->addWarning('Foo');
-      $log->addWarning(print_r($userlist,true));
+      error_log(print_r($userlist,true));
+//      $log = new Logger('name');
+//      $log->pushHandler(new StreamHandler('php://stderr', Logger::WARNING));
+//      $log->addWarning('Foo');
+//      $log->addWarning(print_r($userlist,true));
       error_log(print_r($userlist,true));
       file_put_contents("php://stderr", print_r($userlist,true));
       $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userlist["user_id"]);
