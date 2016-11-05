@@ -150,15 +150,14 @@ function DoActionAll($message_text){
     //$action = new UriTemplateActionBuilder("クリックしてね", /* まとめのURL */ );
     $action = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("石井", "石井");
     // カルーセルのカラムを作成する
-    $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
+    $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
     $columns[] = $column;
     }
     // カラムの配列を組み合わせてカルーセルを作成する
-    $carousel = new CarouselTemplateBuilder($columns);
+    $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
     // カルーセルを追加してメッセージを作る
-    $carousel_message = new TemplateMessageBuilder("メッセージのタイトル", $carousel);
-
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("");
+    
+    $carousel_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("メッセージのタイトル", $carousel);
     $response = $bot->pushMessage($event->source->userId, $carousel_message);
 
 
