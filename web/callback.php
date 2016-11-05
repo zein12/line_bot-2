@@ -148,7 +148,8 @@ function DoActionAll($message_text){
     $columns = []; // カルーセル型カラムを5つ追加する配列
     foreach ($lists as $list) {
     // カルーセルに付与するボタンを作る
-    $action = new UriTemplateActionBuilder("クリックしてね","aaa");
+    //$action = new UriTemplateActionBuilder("クリックしてね","aaa");
+    $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("石井", "石井");
     // カルーセルのカラムを作成する
     $column = new CarouselColumnTemplateBuilder("タイトル(40文字以内)", "追加文", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action]);
     $columns[] = $column;
