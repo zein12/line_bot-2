@@ -51,8 +51,8 @@ require('../vendor/autoload.php');
 $input = file_get_contents('php://input');
 $json = json_decode($input);
 $event = $json->events[0];
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('vYskIIIna79UwhpXsYtI3Xd8LsBWIrYwurJ6bWajgIKK9o7hXJuYAAl16uw8E1+9RuwuNHMPU/JEv2bL9FSu6hglkLY+fTZsSCtiEqsObUsZtUf1Hp7mmPZmttk8REBs4635vsMjsrd21TXyEN8iTQdB04t89/1O/w1cDnyilFU=');
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'e051f306f6d42b66e715790b82e0544d']);
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('3/cEBpOR0mjAMUtnHKrSrx3N6FnMVNPYfXBIwMO6HNGaljxuxTxZz2fGrmZYFwqfV3dvAWMa7FEGrmOONfbZ7or1wxYgpjbtFMS0Mkk+RftjvYSrUpThxAHGiivf2M662z2zM5P8BSKby0dJiBG3GQdB04t89/1O/w1cDnyilFU=');
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'a6b4b1a80d9f25eb0a719fc92cef7d86']);
 
 
 ////////////////////////////
@@ -121,10 +121,10 @@ return;
 function DoActionAll($message_text){
   global $bot, $event, $link, $gameMode, $_SERVER, $gameRoomId;
   if ("@help" == $message_text) {
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("[ヘルプ]\n@gameをグループチャットでコメントすることでゲーム開始前待機時間に移行します。そしてグループチャットがゲームルームとして認識され、ルームナンバーが発行されます。\nルームナンバーをそのままコピーして個人チャットで私にコメントすれば参加者として認識されます。\nゲーム開始前待機時間では、@memberをコメントすることで現在の参加者を見ることが出来ます。参加者が揃ったら@startしてください。ゲームが始まり夜時間へと移行します。\n夜時間では個人チャットに送られる私のコメントに従って行動してください。村人、狂人、人狼、吊人も了解ボタンを押してください。全員の行動が終われば自動的に議論時間へと移行します。\n議論時間の初めに個人チャットに投票ボタンをコメントします。ゲームルームで議論をし、投票する相手を決め投票してください。全員の投票が終われば自動的に投票結果、勝敗が開示され、ゲームが終了します。\nもう一度同じメンバーでやりたい場合は@newgameを、終わりたい、メンバーを追加したい場合は@endをゲームルームでコメントしてください。\n\n※ゲーム中に私をゲームルームから削除するとゲームがリセットされます");
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Bermigrasi ke awal permainan sebelum waktu menunggu untuk mengomentari Help] \ n @game di grup chat. Dan grup chat diakui sebagai ruang permainan, . sebagai peserta jika saya mengomentari obrolan individu. Dalam n permainan \ sebelum dimulainya waktu tunggu, Anda dapat melihat peserta saat ini untuk komentar para @member. Harap @start Ketika sdh dilengkapi dengan peserta. Permainan akan mulai bermigrasi ke waktu malam. \ N Silakan untuk bertindak sesuai dengan komentar saya untuk dikirim ke chat pribadi di waktu malam. silahkan tekan tombol OK. Bermigrasi ke otomatis waktu diskusi Setelah selesai. Pada awal \ waktu n diskusi untuk mengomentari tombol voting dalam individu chat. Pembahasan di ruang permainan, silahkan memilih memutuskan siapa yang harus memilih. Secara otomatis hasil voting Setelah selesai suara semua, menang atau kerugian diungkapkan, permainan akan berakhir. \ N a @newgame Jika Anda ingin melakukannya lagi dengan anggota yang sama, ingin akhirnya, jika Anda ingin menambahkan anggota silakan komentar yang @end di ruang permainan. \ N \ n ※ Ketika Anda menghapus aku dari ruang permainan selama pertandingan permainan akan diatur ulang");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   } else if ("@rule" == $message_text) {
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルール説明だよ");
+    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Aturan ket");
     $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
   } else if ("@but1" == $message_text){
     //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ボタンだよ");
@@ -152,12 +152,12 @@ function DoActionAll($message_text){
     //   }
 
 
-    $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(石井, "石井");
-    $action1 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(川崎, "川崎");
-    $action2 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(小野, "小野");
+    $action0 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(石井, "Ishii");
+    $action1 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(川崎, "Kawasaki");
+    $action2 = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(小野, "ono");
 
-    $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("誰に投票する？", "投票したい人を選んでね！", "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action0, $action1, $action2]);
-    $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("投票ボタンはここに表示されてるよ", $button);
+    $button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("Siapa yang harus memilih? "" Aku memilih orang-orang yang ingin memilih! " "https://" . $_SERVER['SERVER_NAME'] . "/kyojin.jpeg", [$action0, $action1, $action2]);
+    $button_message = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("Tombol Voting ditampilkan di sini", $button);
     
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("");
 
@@ -188,8 +188,8 @@ function DoActionAll($message_text){
               $user_name = mysqli_real_escape_string($link, $profile['displayName']);
               $user_id = mysqli_real_escape_string($link, $event->source->userId);
               $room_num = mysqli_real_escape_string($link, $row[0]);
-              $result = mysqli_query($link, "insert into user (user_id, user_name, game_room_num, role, voted_num, is_roling, is_voting) values ('$user_id', '$user_name', '$room_num', '無し', 0, 'false', 'false');");
-              $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($user_name . "はゲームに参加したよ！");
+              $result = mysqli_query($link, "insert into user (user_id, user_name, game_room_num, role, voted_num, is_roling, is_voting) values ('$user_id', '$user_name', '$room_num', 'tanpa', 0, 'false', 'false');");
+              $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($user_name . "Yang berpartisipasi dalam permainan!");
               $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
             }
           }
@@ -213,12 +213,12 @@ function DoActionBefore($message_text){
       }
       $gameRoomId = mysqli_real_escape_string($link, $gameRoomId);
       $result = mysqli_query($link, "insert into game_room (game_room_num, game_room_id, game_mode, num_of_people, num_of_roles, num_of_votes) values ('$roomNumber', '$gameRoomId', 'WAITING', 0, 0, 0);");
-      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ルームNumberを発行したよ！\nルームナンバーは「" . $roomNumber . "」だよ！");
+      $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Ruang NumberItu dikeluarkan! \ N nomor ruang adalah "" . $roomNumber . "」だよ！");
       $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
     }
   }
 }
-//WaitingのDoAction,メッセージを見てアクションする
+//WaitingのDoAction,Aksi untuk melihat pesan
 function DoActionWaiting($message_text){
   global $bot, $event, $link;
   if("group" == $event->source->type || "room" == $event->source->type){
@@ -251,13 +251,13 @@ function DoActionEnd($message_text){
 //部屋に入ったときに諸々発言
 function DoActionJoin(){
   global $bot, $event;
-  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("僕はワンナイト人狼Botだよ！\n\nワンナイト人狼のルールを知りたいときは「@rule」\nこのbotの使い方を知りたいときは「@help」\nゲームを始めたいときは「@game」\n\nってコメントしてね！");
+  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Aku serigala Bot One Night ini! \ N \ n Jika Anda ingin tahu aturan serigala satu malam ketika Anda ingin memulai "@help" \ n permainan ketika Anda ingin tahu bagaimana menggunakan "@rule" \ n bot ini adalah "@game" \ n \ n berkomentar saya!");
   $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 }
 //部屋から退出させられるときの処理
 function DoActionLeave(){
   global $bot, $event;
-  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ばいばーい！\nまたやりたくなったら入れてねー！");
+  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Baibai! Aku meletakkan Setelah \ n juga menjadi ingin melakukan!");
   $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 }
 //DoActionNightで役職行動のPostBack来たらこれを使う
